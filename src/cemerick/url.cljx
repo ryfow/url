@@ -29,7 +29,7 @@
 (defn map->query
   [m]
   (some->> (seq m)
-    sort                     ; sorting makes testing a lot easier :-)
+    (sort-by (fn [[k v]] (name k)))  ; sorting makes testing a lot easier :-)
     (map (fn [[k v]]
            [(url-encode (name k))
             "="

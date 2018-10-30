@@ -47,6 +47,12 @@
     nil nil
     "" nil))
 
+(deftest query-mixed-keys
+  (is (= "https://localhost:80?baz=bam&foo=bar"
+         (-> (url "https://localhost:80?foo=bar")
+                (assoc-in [:query :baz] "bam")
+                str))))
+
 (deftest user-info-edgecases
   (are [user-info url-string] (= user-info ((juxt :username :password) (url url-string)))
     ["a" nil] "http://a@foo"
